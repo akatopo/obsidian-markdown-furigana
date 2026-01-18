@@ -21,6 +21,7 @@ const convertFurigana = (element: Text): Node => {
       kanji.forEach((k, i) => {
         rubyNode.appendText(k)
         rubyNode.createEl('rt', { text: furi[i] })
+          .setAttribute('furigana', furi[i])
       })
       let offset = lastNode.textContent.indexOf(match[0])
       const nodeToReplace = lastNode.splitText(offset)
@@ -75,9 +76,11 @@ class RubyWidget extends WidgetType {
 
   toDOM(view: EditorView): HTMLElement {
     let ruby = document.createElement("ruby")
+    ruby.id = 'test-id'
     this.kanji.forEach((k, i) => {
       ruby.appendText(k)
       ruby.createEl("rt", { text: this.furi[i] })
+        .setAttribute('furigana', this.furi[i])
     })
     return ruby
   }

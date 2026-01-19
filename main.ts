@@ -19,7 +19,7 @@ const convertFurigana = (element: Text): Node => {
       const rubyNode = document.createElement('ruby')
       rubyNode.addClass('furi')
       kanji.forEach((k, i) => {
-        rubyNode.appendText(k)
+        rubyNode.createSpan({ text: k, cls: 'kanji' })
         rubyNode.createEl('rt', { text: furi[i] })
           .setAttribute('furigana', furi[i])
       })
@@ -78,7 +78,7 @@ class RubyWidget extends WidgetType {
     let ruby = document.createElement("ruby")
     ruby.id = 'test-id'
     this.kanji.forEach((k, i) => {
-      ruby.appendText(k)
+      ruby.createSpan({ text: k, cls: 'kanji' })
       ruby.createEl("rt", { text: this.furi[i] })
         .setAttribute('furigana', this.furi[i])
     })
